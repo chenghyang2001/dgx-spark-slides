@@ -163,9 +163,9 @@ const btnPlay = document.getElementById('btn-play');
 const speedSelect = document.getElementById('speed-select');
 function autoNext() {
   const g = GROUPS[curGroup];
+  // 章節內循環：到當前章最後一頁 → 回該章第一頁，不跳下一章、不全域循環
   if (curSlide < g.images.length-1) loadSlide(curGroup, curSlide+1);
-  else if (curGroup < GROUPS.length-1) { buildThumbsFor(curGroup+1); loadSlide(curGroup+1, 0); }
-  else { buildThumbsFor(0); loadSlide(0, 0); }
+  else loadSlide(curGroup, 0);
 }
 function stopAuto() { clearInterval(autoInterval); autoInterval=null; btnPlay.innerHTML='&#9654; 自動播放'; btnPlay.classList.remove('playing'); }
 btnPlay.onclick = function() {
